@@ -28,13 +28,21 @@ In the [**`Dockerfile`**](https://github.com/ruddra/docker-django/blob/master/co
 Checkout the [commands](#commands) section for more usage.
 
 ## Preview
-A default Django project resides in `src` directory. So, when you start the project, you will see the following screen in `8000` port:
+A default Django project resides in `src` directory. So, when you start the project, you will see the following screen at http://localhost:8000 :
 
 ![Demo One](https://github.com/ruddra/blog-images/raw/master/Demo%201.png)
 
 Also when you access the django container log via `make log-web`, you will see the following:
 
 ![Demo Two](https://github.com/ruddra/blog-images/raw/master/Demo%202.png)
+
+## Tracing
+
+If you use `docker-compose up -d` and launch everything, you'll also get to see jaeger show off traces of events.
+The ui ought to be available at http://localhost:16686
+
+The hotrod demo also runs, so you can test out different configs with django, and use hotrod to compare.
+Hotrod is available at http://localhost:8080
 
 ## Commands
 To use this project, run this commands:
