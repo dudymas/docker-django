@@ -19,7 +19,7 @@ app.config_from_object('django.conf:settings', namespace='CELERY')
 app.autodiscover_tasks(['mydjango'])
 
 @worker_process_init.connect
-def hook_up_dat_trace_baybay(*args, **kwargs):
+def init_tracing(*args, **kwargs):
     init_jaeger_tracer()
     connect_celery_signals()
     install_all_patches()
