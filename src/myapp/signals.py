@@ -9,7 +9,7 @@ def inject_tracing_data(
     tracer = global_tracer()
     scope = tracer.start_active_span('task_publish', finish_on_close=False)
     span_map = {}
-    tracer.inject(scope.span, Format.TEXT_MAP, span_map)
+    tracer.inject(scope.span, Format.HTTP_HEADERS, span_map)
     headers['span_map'] = span_map
 
 
@@ -17,9 +17,9 @@ def extract_tracing_data(sender=None, task_id=None, task=None, **kwargs):
     tracer = global_tracer()
     print(f'starting {task.name}')
     if hasattr(task.request, 'span_map'):
-        ctxt = tracer.extract(Format.TEXT_MAP, task.request.span_map)
+        ctxt = tracer.extract(Format.HTTP_HEADERS, task.request.span_map)
     if ctxt:
-        print('using existing span')
+        print(f'using existing span, {ctxt}')
         tracer.start_active_span(task.name, child_of=ctxt, finish_on_close=False)
     else:
         print('making a new span!')

@@ -1,5 +1,6 @@
 from __future__ import absolute_import, unicode_literals
 import os, time
+from datetime import date
 from celery import Celery, shared_task
 import logging
 logger = logging.getLogger("Celery")
@@ -28,10 +29,3 @@ def init_tracing(*args, **kwargs):
 @shared_task
 def debug_task(self):
     print('Request: {0!r}'.format(self.request))
-
-
-@shared_task(bind=True)
-def show_hello_world(self):
-    logger.info("-"*25)
-    logger.info("Printing Hello from Celery")
-    logger.info("-"*25)

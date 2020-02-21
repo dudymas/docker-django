@@ -1,3 +1,4 @@
+import sys
 from django.apps import AppConfig
 from mydjango import settings
 from jaeger_client import Config
@@ -11,7 +12,7 @@ def init_jaeger_tracer(service_name='mydjango'):
             'logging': True,
             'local_agent': {'reporting_host': 'jaeger', 'reporting_port': '6831',},
         },
-        service_name=service_name,
+        service_name=sys.argv[0].split('/')[-1],
         validate=True,
     )
     return config.initialize_tracer()
